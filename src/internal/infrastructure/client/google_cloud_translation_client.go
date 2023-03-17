@@ -2,7 +2,7 @@ package client
 
 import (
 	"context"
-	"paper-summarizer/src/internal/domain"
+	"paper-summarizer/internal/domain"
 
 	"cloud.google.com/go/translate"
 	"golang.org/x/text/language"

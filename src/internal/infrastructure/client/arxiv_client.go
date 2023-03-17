@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
-	"paper-summarizer/src/internal/domain"
+	"paper-summarizer/internal/domain"
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"

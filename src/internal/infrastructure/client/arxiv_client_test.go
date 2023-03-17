@@ -1,7 +1,7 @@
 package client
 
 import (
-	"paper-summarizer/src/internal/domain"
+	"paper-summarizer/internal/domain"
 	"testing"
 )
 
