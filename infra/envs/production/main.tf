@@ -21,6 +21,8 @@ locals {
   services_to_enable = [
     # "cloudresourcemanager.googleapis.com",
     "translate.googleapis.com",
+    "cloudbuild.googleapis.com",
+    "run.googleapis.com"
   ]
 }
 resource "google_project_service" "translation_api" {
