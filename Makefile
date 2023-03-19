@@ -2,7 +2,7 @@
 
 test:
 	@echo "Running unit tests..."
-	@cd ./src && go test -v ./...
+	@cd ./src && go test -v ./... -count=1
 	@echo "All tests passed successfully!"
 
 tffmt:
