@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"paper-summarizer/internal/config"
+	"paper-summarizer/internal/container"
 	"paper-summarizer/internal/infrastructure/handler"
 
 	"github.com/line/line-bot-sdk-go/v7/linebot"
@@ -15,5 +16,9 @@ func main() {
 		log.Fatal(err)
 	}
 
-	handler.HttpRouter(bot)
+	diContainer, err := container.NewContainler()
+	if err != nil {
+		log.Fatal(err)
+	}
+	handler.HttpRouter(c, bot, diContainer)
 }

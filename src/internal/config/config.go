@@ -5,12 +5,14 @@ import (
 )
 
 type Config struct {
+	PaperMaxNum                        int
 	LineMessagingAPIChannelAccessToken string
 	LineMessagingAPIChannelSecret      string
 }
 
 func New() *Config {
 	return &Config{
+		PaperMaxNum:                        10,
 		LineMessagingAPIChannelAccessToken: getEnv("LINE_MESSAGING_API_CHANNEL_ACCESS_TOKEN", ""),
 		LineMessagingAPIChannelSecret:      getEnv("LINE_MESSAGING_API_CHANNEL_SECRET", ""),
 	}
