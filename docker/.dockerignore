@@ -1,0 +1,20 @@
+# エディタやOSによって生成される一時ファイルやキャッシュファイル
+*.log
+*.swp
+*.swo
+*.bak
+*.tmp
+*.DS_Store
+*.idea/
+.vscode/
+
+# Go言語のビルドキャッシュやバイナリファイル
+*.exe
+*.out
+bin/
+vendor/
+
+# テスト用ファイルやドキュメント
+*_test.go
+README.md
+LICENSE

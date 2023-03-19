@@ -1,4 +1,4 @@
-.PHONY: test, tffmt
+.PHONY: test tffmt docker-build docker-clean
 
 test:
 	@echo "Running unit tests..."
@@ -8,3 +8,22 @@ test:
 tffmt:
 	@echo "Run tf fmt"
 	@terraform fmt -recursive
+
+include .env
+
+# イメージ名とタグを定義
+IMAGE_NAME := golang-web-server
+IMAGE_TAG := latest
+
+docker-build:
+	docker build -t $(IMAGE_NAME):$(IMAGE_TAG) \
+	-f ./docker/Dockerfile \
+	--build-arg LINE_MESSAGING_API_CHANNEL_ACCESS_TOKEN=${LINE_MESSAGING_API_CHANNEL_ACCESS_TOKEN} \
+	--build-arg LINE_MESSAGING_API_CHANNEL_SECRET=${LINE_MESSAGING_API_CHANNEL_SECRET} \
+	.
+
+docker-run:
+	docker run -it --rm $(IMAGE_NAME):$(IMAGE_TAG) sh
+
+docker-clean:
+	docker rmi $(IMAGE_NAME):$(IMAGE_TAG)
