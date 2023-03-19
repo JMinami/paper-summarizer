@@ -1,3 +1,7 @@
+# secret file
+secret/
+.env
+
 # Local .terraform directories
 **/.terraform/*
 
