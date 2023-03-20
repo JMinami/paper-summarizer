@@ -5,20 +5,14 @@ import (
 	"paper-summarizer/internal/config"
 	"paper-summarizer/internal/container"
 	"paper-summarizer/internal/infrastructure/handler"
-
-	"github.com/line/line-bot-sdk-go/v7/linebot"
 )
 
 func main() {
 	c := config.New()
-	bot, err := linebot.New(c.LineMessagingAPIChannelSecret, c.LineMessagingAPIChannelAccessToken)
-	if err != nil {
-		log.Fatal(err)
-	}
 
 	diContainer, err := container.NewContainler()
 	if err != nil {
 		log.Fatal(err)
 	}
-	handler.HttpRouter(c, bot, diContainer)
+	handler.HttpRouter(c, diContainer)
 }
