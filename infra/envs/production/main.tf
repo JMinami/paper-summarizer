@@ -22,7 +22,9 @@ locals {
     # "cloudresourcemanager.googleapis.com",
     "translate.googleapis.com",
     "cloudbuild.googleapis.com",
-    "run.googleapis.com"
+    "iamcredentials.googleapis.com",
+    "run.googleapis.com",
+    "iam.googleapis.com"
   ]
 }
 resource "google_project_service" "translation_api" {
@@ -32,4 +34,15 @@ resource "google_project_service" "translation_api" {
   service                    = each.value
   disable_dependent_services = true
   disable_on_destroy         = false
+}
+
+resource "google_service_account" "github-actions" {
+  project = var.project_id
+  account_id = "github-actions"
+  display_name = "A service account for GitHub Actions"
+}
+
+resource "google_project_service" "project" {
+  project = var.project_id
+  service = "iamcredentials.googleapis.com"
 }
