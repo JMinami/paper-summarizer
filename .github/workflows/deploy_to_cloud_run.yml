@@ -6,7 +6,7 @@ on:
       - master
 
 env:
-  SERVICE_NAME: "paper-summarizer"
+  SERVICE_NAME: paper-summarizer
 
 jobs:
   deploy:
@@ -26,3 +26,15 @@ jobs:
         with:
           workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
           service_account: github-actions@${{ secrets.GCP_PROJECT_ID }}.iam.gserviceaccount.com
+      
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0
+      
+      - name: Authorize Docker push
+        run: gcloud auth configure-docker
+
+      - name: Build Docker image
+        run: docker build -t asia.gcr.io/$PROJECT_ID/$SERVICE_NAME:${{ github.sha }} .
+
+      - name: Push Docker Image
+        run: docker push asia.gcr.io/$PROJECT_ID/$SERVICE_NAME:${{ github.sha }}
