@@ -5,31 +5,18 @@ on:
     branches:
       - master
 
+env:
+  PROJECT_ID: "paper-summarizer-381022"
+  SERVICE_NAME: "paper-summarizer"
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    steps:
-    - id: 'auth'
-      uses: 'google-github-actions/auth@v1'
-      with:
-        workload_identity_provider: 'projects/123456789/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
-        service_account: 'my-service-account@my-project.iam.gserviceaccount.com'
-
-    - name: Set up Google Cloud SDK
-      uses: google-github-actions/setup-gcloud@v1
-      with:
-        version: '>=363.0.0'
-
-    - name: Build and push Docker image
-      run: |
-        gcloud builds submit --config cloudbuild.yml .
-
-    - name: Deploy to Cloud Run
-      run: |
-        gcloud run deploy golang-web-server \
-          --image gcr.io/${{ secrets.GCP_PROJECT_ID }}/golang-web-server:latest \
-          --region us-central1 \
-          --platform managed \
-          --allow-unauthenticated \
-          --set-env-vars API_KEY=${{ secrets.API_KEY }},API_SECRET=${{ secrets.API_SECRET }}
+    permissions: 
+      contents: 'read'
+      id-token: 'write'
+    
+    steps: 
+      - name: Checkout
+        uses: actions/checkout@v3
