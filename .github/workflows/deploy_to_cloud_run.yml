@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - master
+    paths:
+      - ".github/**"
+      - "docker/**"
+      - "src/**" 
 
 env:
   PROJECT_ID: paper-summarizer-381022
