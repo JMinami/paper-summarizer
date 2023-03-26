@@ -24,9 +24,34 @@ locals {
     "cloudbuild.googleapis.com",
     "iamcredentials.googleapis.com",
     "run.googleapis.com",
-    "iam.googleapis.com"
+    "iam.googleapis.com",
   ]
 }
+
+resource "google_project_iam_binding" "project" {
+  project = var.project_id
+  role = "roles/run.admin"
+  members = [
+    "serviceAccount:github-actions@paper-summarizer-381022.iam.gserviceaccount.com"
+  ]
+}
+
+resource "google_project_iam_binding" "storage" {
+  project = var.project_id
+  role = "roles/storage.admin"
+  members = [
+    "serviceAccount:github-actions@paper-summarizer-381022.iam.gserviceaccount.com"
+  ]
+}
+
+resource "google_project_iam_binding" "iam" {
+  project = var.project_id
+  role = "roles/iam.serviceAccountUser"
+  members = [
+    "serviceAccount:github-actions@paper-summarizer-381022.iam.gserviceaccount.com"
+  ]
+}
+
 resource "google_project_service" "translation_api" {
   project  = var.project_id
   for_each = toset(local.services_to_enable)
@@ -36,11 +61,14 @@ resource "google_project_service" "translation_api" {
   disable_on_destroy         = false
 }
 
+
 resource "google_service_account" "github-actions" {
   project      = var.project_id
   account_id   = "github-actions"
   display_name = "A service account for GitHub Actions"
 }
+
+
 
 resource "google_service_account_iam_binding" "github-actions" {
   service_account_id = google_service_account.github-actions.name
