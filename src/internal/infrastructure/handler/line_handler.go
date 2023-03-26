@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"log"
 	"net/http"
 	"paper-summarizer/internal/config"
 	"paper-summarizer/internal/container"
@@ -32,6 +33,7 @@ func lineHandler(conf *config.Config, container *container.Container) echo.Handl
 					err = line_handlers.LinePaperSummarizer(container, message.Text, conf.PaperMaxNum)(bot, event)
 				}
 				if err != nil {
+					log.Println(err)
 					ctx.String(http.StatusInternalServerError, err.Error())
 				}
 			}

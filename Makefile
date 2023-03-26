@@ -23,7 +23,7 @@ docker-build:
 	.
 
 docker-run:
-	docker run -it --rm $(IMAGE_NAME):$(IMAGE_TAG) sh
+	docker run -p 8080:8080 $(IMAGE_NAME):$(IMAGE_TAG)
 
 docker-clean:
 	docker rmi $(IMAGE_NAME):$(IMAGE_TAG)

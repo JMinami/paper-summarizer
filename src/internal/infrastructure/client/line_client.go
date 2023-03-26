@@ -23,8 +23,8 @@ func NewLineClient(bot *linebot.Client, event *linebot.Event) *LineClient {
 }
 
 func (c *LineClient) Send(message string) error {
-	call := c.bot.ReplyMessage(
-		c.event.ReplyToken,
+	call := c.bot.PushMessage(
+		c.event.Source.UserID,
 		linebot.NewTextMessage(message),
 	)
 	if _, err := call.Do(); err != nil {

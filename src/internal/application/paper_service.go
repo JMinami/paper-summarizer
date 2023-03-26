@@ -25,15 +25,15 @@ func (s *PaperService) TranslatePapers(keyword string, maxNum int) (domain.Paper
 	var res domain.Papers
 	for _, paper := range papers {
 		texts := []string{
-			paper.Title, paper.Summary,
+			paper.Summary,
 		}
 		translatedTexts, err := s.translator.TranslateText(texts)
 		if err != nil {
 			continue
 		}
 		res = append(res, domain.Paper{
-			Title:   translatedTexts[0],
-			Summary: translatedTexts[1],
+			Title:   paper.Title,
+			Summary: translatedTexts[0],
 			URL:     paper.URL,
 		})
 	}
