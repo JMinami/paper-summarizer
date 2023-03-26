@@ -30,7 +30,7 @@ locals {
 
 resource "google_project_iam_binding" "project" {
   project = var.project_id
-  role = "roles/run.admin"
+  role    = "roles/run.admin"
   members = [
     "serviceAccount:github-actions@paper-summarizer-381022.iam.gserviceaccount.com"
   ]
@@ -38,7 +38,7 @@ resource "google_project_iam_binding" "project" {
 
 resource "google_project_iam_binding" "storage" {
   project = var.project_id
-  role = "roles/storage.admin"
+  role    = "roles/storage.admin"
   members = [
     "serviceAccount:github-actions@paper-summarizer-381022.iam.gserviceaccount.com"
   ]
@@ -46,7 +46,7 @@ resource "google_project_iam_binding" "storage" {
 
 resource "google_project_iam_binding" "iam" {
   project = var.project_id
-  role = "roles/iam.serviceAccountUser"
+  role    = "roles/iam.serviceAccountUser"
   members = [
     "serviceAccount:github-actions@paper-summarizer-381022.iam.gserviceaccount.com"
   ]
@@ -72,7 +72,7 @@ resource "google_service_account" "github-actions" {
 
 resource "google_service_account_iam_binding" "github-actions" {
   service_account_id = google_service_account.github-actions.name
-  role = "roles/iam.workloadIdentityUser"
+  role               = "roles/iam.workloadIdentityUser"
   members = [
     "principalSet://iam.googleapis.com/projects/571905713425/locations/global/workloadIdentityPools/github-actions/*"
   ]
