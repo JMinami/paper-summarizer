@@ -35,7 +35,11 @@ jobs:
         run: gcloud auth configure-docker
 
       - name: Build Docker image
-        run: docker build -t asia.gcr.io/$PROJECT_ID/$SERVICE_NAME:${{ github.sha }} ./docker/Dockerfile
+        run: >-
+          docker build -t asia.gcr.io/$PROJECT_ID/$SERVICE_NAME:${{ github.sha }} ./docker/Dockerfile 
+          --build-arg LINE_MESSAGING_API_CHANNEL_ACCESS_TOKEN=${{ secrets.LINE_MESSAGING_API_CHANNEL_ACCESS_TOKEN }} 
+          --build-arg LINE_MESSAGING_API_CHANNEL_SECRET=${{ secrets.LINE_MESSAGING_API_CHANNEL_SECRET }}  
+          .
 
       - name: Push Docker Image
         run: docker push asia.gcr.io/$PROJECT_ID/$SERVICE_NAME:${{ github.sha }}
