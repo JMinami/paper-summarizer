@@ -6,7 +6,7 @@ on:
       - master
 
 env:
-  PROJECt_ID: paper-summarizer-381022
+  PROJECT_ID: paper-summarizer-381022
   SERVICE_NAME: paper-summarizer
 
 jobs:
