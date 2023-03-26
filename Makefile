@@ -17,7 +17,7 @@ IMAGE_TAG := latest
 
 docker-build:
 	docker build -t $(IMAGE_NAME):$(IMAGE_TAG) \
-	-f ./docker/Dockerfile \
+	-f ./docker/Dockerfile.dev \
 	--build-arg LINE_MESSAGING_API_CHANNEL_ACCESS_TOKEN=${LINE_MESSAGING_API_CHANNEL_ACCESS_TOKEN} \
 	--build-arg LINE_MESSAGING_API_CHANNEL_SECRET=${LINE_MESSAGING_API_CHANNEL_SECRET} \
 	.
